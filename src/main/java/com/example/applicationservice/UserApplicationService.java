@@ -15,8 +15,8 @@ public class UserApplicationService {
   private MessageSource messageSource;
 
   // 性別のMapを生成する
-  public Map<String, Object> getGenderMap() {
-    Map<String, Object> genderMap = new LinkedHashMap<>();
+  public Map<String, Integer> getGenderMap() {
+    Map<String, Integer> genderMap = new LinkedHashMap<>();
     String male = messageSource.getMessage("male", null, Locale.JAPAN);
     String female = messageSource.getMessage("female", null, Locale.JAPAN);
     genderMap.put(male, 1);
