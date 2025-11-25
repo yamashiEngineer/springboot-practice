@@ -7,6 +7,8 @@ import com.example.domain.user.model.MUser;
 import com.example.domain.user.service.UserService;
 import com.example.repository.UserMapper;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -19,5 +21,12 @@ public class UserServiceImpl implements UserService {
     user.setDepartmentId(1);
     user.setRole("ROLE_GENERAL");
     mapper.insertOne(user);
+
+  }
+
+  // ユーザー一覧取得
+  @Override
+  public List<MUser> getUsers() {
+    return mapper.findMany();
   }
 }
