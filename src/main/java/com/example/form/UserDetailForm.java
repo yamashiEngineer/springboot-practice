@@ -11,5 +11,5 @@ public class UserDetailForm {
   private String userName;
   private Date birthday;
   private Integer age;
-  private String gender;
+  private Integer gender;
 }
