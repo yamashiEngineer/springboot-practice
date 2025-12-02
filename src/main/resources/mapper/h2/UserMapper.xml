@@ -26,10 +26,10 @@
   <!-- ユーザー1件取得 -->
   <select id="findOne" resultMap="user"> SELECT * FROM m_user WHERE user_id = #{userId} </select>
 
-  <!-- ユーザー更新 -->
+  <!-- ユーザー1件更新 -->
   <update id="updateOne"> UPDATE m_user SET password = #{password}, user_name = #{userName} WHERE
     user_id = #{userId} </update>
 
-  <!-- ユーザー削除 -->
+  <!-- ユーザー1件削除 -->
   <delete id="deleteOne"> DELETE FROM m_user WHERE user_id = #{userId} </delete>
 </mapper>

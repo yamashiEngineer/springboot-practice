@@ -18,8 +18,8 @@ public interface UserMapper {
   // ユーザー取得（1件）
   public MUser findOne(String userId);
 
-  // ユーザー更新
-  public int updateOne(@Param("userId") String userId,
+  // ユーザー更新(1件)
+  public void updateOne(@Param("userId") String userId,
       @Param("password") String password,
       @Param("userName") String userName);
 
