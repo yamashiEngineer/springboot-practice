@@ -24,10 +24,10 @@ public class UserServiceImpl implements UserService {
 
   }
 
-  // ユーザー一覧取得
+  // ユーザー取得
   @Override
-  public List<MUser> getUsers() {
-    return mapper.findMany();
+  public List<MUser> getUsers(MUser user) {
+    return mapper.findMany(user);
   }
 
   // ユーザー取得（1件）

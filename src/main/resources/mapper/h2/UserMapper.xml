@@ -21,7 +21,12 @@
 
 
   <!-- ユーザー複数件取得 -->
-  <select id="findMany" resultType="com.example.domain.user.model.MUser"> SELECT * FROM m_user </select>
+  <select id="findMany" resultType="com.example.domain.user.model.MUser"> SELECT * FROM m_user <where>
+      <if test="userId!=null"> user_id like '%' || #{userId} || '%' </if>
+      <if test="userName != null">and
+    user_name like '%' || #{userName} || '%' </if>
+    </where>
+  </select>
 
   <!-- ユーザー1件取得 -->
   <select id="findOne" resultMap="user"> SELECT * FROM m_user WHERE user_id = #{userId} </select>
