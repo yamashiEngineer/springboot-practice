@@ -12,7 +12,7 @@ public class GlobalControllAdvice {
 
   // データベース関連の例外処理
   @ExceptionHandler(DataAccessException.class)
-  public String DataAccessExceptionHandler(DataAccessException e, Model model) {
+  public String dataAccessExceptionHandler(DataAccessException e, Model model) {
 
     // 空文字をセット
     model.addAttribute("error", "");
@@ -39,7 +39,7 @@ public class GlobalControllAdvice {
 
     // HTTPステータスコード（500）をModelに登録
     model.addAttribute("status", HttpStatus.INTERNAL_SERVER_ERROR);
-    
+
     return "error";
   }
 }
