@@ -4,7 +4,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
@@ -50,5 +57,34 @@ public class SecurityConfig {
             .permitAll());
 
     return http.build();
+  }
+
+  @Bean
+  public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
+
+    // ユーザー名: user, パスワード: password, 権限: USER のユーザーを作成
+    UserDetails user = User.builder()
+        .username("user")
+        // パスワードのハッシュ化
+        .password(passwordEncoder.encode("password"))
+        .roles("GENERAL")
+        .build();
+
+    // ユーザー名: admin, パスワード: admin_pass, 権限: ADMIN のユーザーを作成
+    UserDetails admin = User.builder()
+        .username("admin")
+        .password(passwordEncoder.encode("admin"))
+        .roles("ADMIN")
+        .build();
+
+    // 複数のユーザーをメモリに保持する InMemoryUserDetailsManager を返す
+    return new InMemoryUserDetailsManager(user, admin);
+  }
+
+  // パスワードのハッシュ化アルゴリズムを定義
+  @Bean
+  public PasswordEncoder passwordEncoder() {
+    // BCryptPasswordEncoderは、Spring Securityの標準的な強力なハッシュ化アルゴリズム
+    return new BCryptPasswordEncoder();
   }
 }
