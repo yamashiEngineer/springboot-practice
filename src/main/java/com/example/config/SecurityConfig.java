@@ -38,6 +38,17 @@ public class SecurityConfig {
         // CSRFも無効化
         .csrf(csrf -> csrf.disable());
 
+    // ログイン処理
+    http
+        .formLogin(form -> form
+            .loginProcessingUrl("/login") // ログイン処理のURL
+            .loginPage("/login") // ログインページのURL
+            .defaultSuccessUrl("/user/list", true) // ログイン成功後のリダイレクト先
+            .failureUrl("/login?error") // ログイン失敗時のリダイレクト先
+            .usernameParameter("username") // ログインページのユーザーIDのパラメータ名
+            .passwordParameter("password") // ログインページのパスワードのパラメータ名
+            .permitAll());
+
     return http.build();
   }
 }
