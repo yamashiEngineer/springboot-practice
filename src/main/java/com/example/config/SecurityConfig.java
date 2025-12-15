@@ -52,7 +52,7 @@ public class SecurityConfig {
             .loginPage("/login") // ログインページのURL
             .defaultSuccessUrl("/user/list", true) // ログイン成功後のリダイレクト先
             .failureUrl("/login?error") // ログイン失敗時のリダイレクト先
-            .usernameParameter("username") // ログインページのユーザーIDのパラメータ名
+            .usernameParameter("userId") // ログインページのユーザーIDのパラメータ名
             .passwordParameter("password") // ログインページのパスワードのパラメータ名
             .permitAll());
 
@@ -66,7 +66,7 @@ public class SecurityConfig {
     UserDetails user = User.builder()
         .username("user")
         // パスワードのハッシュ化
-        .password(passwordEncoder.encode("password"))
+        .password(passwordEncoder.encode("user"))
         .roles("GENERAL")
         .build();
 
