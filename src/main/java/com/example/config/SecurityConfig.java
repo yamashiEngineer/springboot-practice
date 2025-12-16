@@ -62,34 +62,4 @@ public class SecurityConfig {
 
     return http.build();
   }
-
-  // @Bean
-  // public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder)
-  // {
-
-  // // ユーザー名: user, パスワード: password, 権限: USER のユーザーを作成
-  // UserDetails user = User.builder()
-  // .username("user")
-  // // パスワードのハッシュ化
-  // .password(passwordEncoder.encode("user"))
-  // .roles("GENERAL")
-  // .build();
-
-  // // ユーザー名: admin, パスワード: admin_pass, 権限: ADMIN のユーザーを作成
-  // UserDetails admin = User.builder()
-  // .username("admin")
-  // .password(passwordEncoder.encode("admin"))
-  // .roles("ADMIN")
-  // .build();
-
-  // // 複数のユーザーをメモリに保持する InMemoryUserDetailsManager を返す
-  // return new InMemoryUserDetailsManager(user, admin);
-  // }
-
-  // // パスワードのハッシュ化アルゴリズムを定義
-  // @Bean
-  // public PasswordEncoder passwordEncoder() {
-  // // BCryptPasswordEncoderは、Spring Securityの標準的な強力なハッシュ化アルゴリズム
-  // return new BCryptPasswordEncoder();
-  // }
 }
