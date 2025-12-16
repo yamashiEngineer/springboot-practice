@@ -58,4 +58,7 @@
 
   <!-- ユーザー1件削除 -->
   <delete id="deleteOne"> DELETE FROM m_user WHERE user_id = #{userId} </delete>
+
+  <!-- ログインユーザー取得 -->
+  <select id="findLoginUser" resultMap="user"> SELECT * FROM m_user WHERE user_id = #{userId} </select>
 </mapper>

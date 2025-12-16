@@ -1,5 +1,6 @@
 package com.example.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,6 +17,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
+  @Autowired
+  private UserDetailsService userDetailsService;
 
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -59,32 +63,33 @@ public class SecurityConfig {
     return http.build();
   }
 
-  @Bean
-  public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
+  // @Bean
+  // public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder)
+  // {
 
-    // ユーザー名: user, パスワード: password, 権限: USER のユーザーを作成
-    UserDetails user = User.builder()
-        .username("user")
-        // パスワードのハッシュ化
-        .password(passwordEncoder.encode("user"))
-        .roles("GENERAL")
-        .build();
+  // // ユーザー名: user, パスワード: password, 権限: USER のユーザーを作成
+  // UserDetails user = User.builder()
+  // .username("user")
+  // // パスワードのハッシュ化
+  // .password(passwordEncoder.encode("user"))
+  // .roles("GENERAL")
+  // .build();
 
-    // ユーザー名: admin, パスワード: admin_pass, 権限: ADMIN のユーザーを作成
-    UserDetails admin = User.builder()
-        .username("admin")
-        .password(passwordEncoder.encode("admin"))
-        .roles("ADMIN")
-        .build();
+  // // ユーザー名: admin, パスワード: admin_pass, 権限: ADMIN のユーザーを作成
+  // UserDetails admin = User.builder()
+  // .username("admin")
+  // .password(passwordEncoder.encode("admin"))
+  // .roles("ADMIN")
+  // .build();
 
-    // 複数のユーザーをメモリに保持する InMemoryUserDetailsManager を返す
-    return new InMemoryUserDetailsManager(user, admin);
-  }
+  // // 複数のユーザーをメモリに保持する InMemoryUserDetailsManager を返す
+  // return new InMemoryUserDetailsManager(user, admin);
+  // }
 
-  // パスワードのハッシュ化アルゴリズムを定義
-  @Bean
-  public PasswordEncoder passwordEncoder() {
-    // BCryptPasswordEncoderは、Spring Securityの標準的な強力なハッシュ化アルゴリズム
-    return new BCryptPasswordEncoder();
-  }
+  // // パスワードのハッシュ化アルゴリズムを定義
+  // @Bean
+  // public PasswordEncoder passwordEncoder() {
+  // // BCryptPasswordEncoderは、Spring Securityの標準的な強力なハッシュ化アルゴリズム
+  // return new BCryptPasswordEncoder();
+  // }
 }
