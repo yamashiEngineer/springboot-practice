@@ -40,7 +40,7 @@ public class SecurityConfig {
 
             // ユーザー登録とログインページも全員許可
             .requestMatchers("/user/signup", "/login").permitAll()
-
+            .requestMatchers("/admin").hasRole("ROLE_ADMIN") // /adminはアドミン権限のみ許可
             .anyRequest().authenticated())
 
         // CSRF対策を無効化
