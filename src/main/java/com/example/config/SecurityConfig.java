@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
@@ -13,6 +15,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -58,6 +61,13 @@ public class SecurityConfig {
             .failureUrl("/login?error") // ログイン失敗時のリダイレクト先
             .usernameParameter("userId") // ログインページのユーザーIDのパラメータ名
             .passwordParameter("password") // ログインページのパスワードのパラメータ名
+            .permitAll());
+
+    // ログアウト処理
+    http
+        .logout(logout -> logout
+            .logoutRequestMatcher(new AntPathRequestMatcher("/logout")) // ログアウト処理のURL
+            .logoutSuccessUrl("/login?logout") // ログアウト成功後のリダイレクト先
             .permitAll());
 
     return http.build();
