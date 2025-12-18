@@ -50,7 +50,7 @@ public class SecurityConfig {
     http
         .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable()))
         // CSRFも無効化
-        .csrf(csrf -> csrf.disable());
+        // .csrf(csrf -> csrf.disable());
 
     // ログイン処理
     http
